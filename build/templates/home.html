@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="jumbo">
+    <h2>Welcome to the Miner Checker<h2>
+    <h3>This is the homepage for miner check to domain.<h3>
+    <small>Site optimized for chrome and firefox.</small>
+  </div>
+
+
+<h3>Check</h3>
+<form action="/command" method="post" name="command" onSubmit="return post_check();">
+  <p>Domain List (ex. www.test1.com,www.test2.com,www.test3.com)<input type="text" name="domainlist" value="{{hosts}}"></p>
+  <p><input type="submit" value="Request"></p>
+</form>
+
+{% if commandResult %}
+
+<h3>Result</h3>
+	<div class="table-responsive"> 
+		<table class="table table-hover"> 
+			<thead>
+                <tr>
+                    <th scope="row" style="text-align:center">IDX</th>
+                    <th scope="row" style="text-align:center">Host</th>
+                    <th scope="row" style="text-align:center">Result</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for commandResult in commandResults %}
+                <tr>
+                    <th style="text-align:center">{{ loop.index }}</th>
+                    <td><strong>{{ commandResult.host }}</strong></td>
+                    <td>{% autoescape off %}{{ commandResult.result }}{% endautoescape %}</td>
+                    <td></td>
+                </tr>
+          {% endfor %}
+            </tbody>
+         </table>
+    </div>
+{% else %}
+{% endif %}
+{% endblock %}

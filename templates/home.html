@@ -13,20 +13,22 @@
   <p><input type="submit" value="Request"></p>
 </form>
 
+{% if commandResult %}
+
 <h3>Result</h3>
 	<div class="table-responsive"> 
 		<table class="table table-hover"> 
 			<thead>
                 <tr>
-                    <th scope="row">IDX</th>
-                    <th scope="row">Host</th>
-                    <th scope="row">Result</th>
+                    <th scope="row" style="text-align:center">IDX</th>
+                    <th scope="row" style="text-align:center">Host</th>
+                    <th scope="row" style="text-align:center">Result</th>
                 </tr>
             </thead>
             <tbody>
             {% for commandResult in commandResults %}
                 <tr>
-                    <th>{{ loop.index }}</th>
+                    <th style="text-align:center">{{ loop.index }}</th>
                     <td><strong>{{ commandResult.host }}</strong></td>
                     <td>{% autoescape off %}{{ commandResult.result }}{% endautoescape %}</td>
                     <td></td>
@@ -35,4 +37,6 @@
             </tbody>
          </table>
     </div>
+{% else %}
+{% endif %}
 {% endblock %}
